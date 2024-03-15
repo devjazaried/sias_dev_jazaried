@@ -1,4 +1,5 @@
-import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-auth.js";
+import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-auth.js"; //Untuk Authentikasi & create email dan password
+import { getFirestore, setDoc, addDoc, doc, collection, updateDoc } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore.js"; // menambah library untuk Firestore
 
 // -------------------------Program Default dari Firebase untuk Web START--------------------------- //
 // Import the functions you need from the SDKs you need
@@ -23,6 +24,9 @@ const app = initializeApp(firebaseConfig);
 // Initialize Firebase
 const auth = getAuth(app);
 
+// Initialize Cloud Firestore and get a reference to the service
+const db = getFirestore(app);
+
 // Submit BUtton
 const submit = document.getElementById('submit');
 submit.addEventListener("click",function(event) {
@@ -32,11 +36,18 @@ submit.addEventListener("click",function(event) {
     const email = document.getElementById('email').value;
     const password = document.getElementById('password').value;
 
-    createUserWithEmailAndPassword(auth, email, password)
+    //create variabel yang akan diinsert ke firestore
+    var firstname = document.getElementById('firstname').value;
+    var lastname = document.getElementById('lastname').value;
+    var emaildb = document.getElementById('emaildb').value;
+
+  //Program untuk mendaftarkan email & password
+  createUserWithEmailAndPassword(auth, email, password)
   .then((userCredential) => {
     // Signed up 
     const user = userCredential.user;
-    alert("Creating Account...")
+
+    alert("Registrasi Akun Berhasil..")
     window.location.href = "index.html" //berfungsi melempar program ke file html lain setelah berhasil creating account
     // ...
   })
@@ -45,5 +56,12 @@ submit.addEventListener("click",function(event) {
     const errorMessage = error.message;
     alert(errorMessage)
     // ..
+  });
+
+  //Program untuk mendaftarkan data users
+  addDoc(collection(db, "Users"), {
+      firstname: firstname,
+      lastname: lastname,
+      email: emaildb
   });
 })
