@@ -37,7 +37,7 @@ submit.addEventListener("click",function(event) {
     // Signed up 
     const user = userCredential.user;
     alert("Masuk ke Dashboard")
-    window.location.href = "dashboard.html" //berfungsi melempar program ke file html lain setelah berhasil creating account
+    window.location.href = "../dashboard/dashboard.html" //berfungsi melempar program ke file html lain setelah berhasil creating account
     // ...
   })
   .catch((error) => {
