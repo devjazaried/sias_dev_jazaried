@@ -37,7 +37,7 @@ submit.addEventListener("click",function(event) {
     // Signed up 
     const user = userCredential.user;
     alert("Masuk ke Dashboard")
-    window.location.href = "dashboard/dashboard" //berfungsi melempar program ke file html lain setelah berhasil creating account
+    window.location.href = "https://devjazaried.github.io/sias_dev_jazaried/dashboard/dashboard.html" //berfungsi melempar program ke file html lain setelah berhasil creating account
     // ...
   })
   .catch((error) => {
